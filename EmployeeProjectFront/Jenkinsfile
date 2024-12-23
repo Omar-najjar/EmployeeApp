@@ -4,6 +4,12 @@ pipeline {
         		IMAGE_NAME = "omarnajar/employee_frontend"
     }
     stages {
+
+        stage ('build docker '){
+            steps{
+                sh 'docker --help'
+            }
+        }
         stage ('build docker image from dockerfile'){
             steps{
                 echo 'start building'
