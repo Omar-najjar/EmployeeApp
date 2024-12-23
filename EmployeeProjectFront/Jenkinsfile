@@ -10,7 +10,7 @@ pipeline {
                     // Get the short Git commit hash
                     GIT_COMMIT = bat(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                 }
-                bat 'docker build -t $IMAGE_NAME:$GIT_COMMIT -t $IMAGE_NAME:latest EmployeeProjectFront'
+                bat 'docker build -t %IMAGE_NAME%:%GIT_COMMIT% -t %IMAGE_NAME%:latest EmployeeProjectFront'
             }
         }
 
