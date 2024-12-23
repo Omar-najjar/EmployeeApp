@@ -1,10 +1,32 @@
 pipeline {
-    agent any 
+    agent any
+    environment{
+        		IMAGE_NAME = "omarnajar/employee_frontend"
+    }
     stages {
-        stage('Stage 1') {
-            steps {
-                echo 'Hello world Front' 
+        stage ('build docker image from dockerfile'){
+            steps{
+                echo 'start building'
+                sh 'docker build -t $IMAGE_NAME:$GIT_COMMIT -t $IMAGE_NAME:latest EmployeeProjectFront/.'
             }
         }
-    }
+
+        stage ('login to omar dockerhub'){
+            steps{
+                sh 'docker login -u $USER -p $PASSWORD'
+            }
+        }
+
+        stage ('push image to omar dockerhub'){
+            steps{
+                sh 'docker push $IMAGE_NAME:$GIT_COMMIT'
+            }
+        }
+
+        stage ('run docker container'){
+             steps{
+                  sh 'docker run -d -p 82:80 $IMAGE_NAME:latest'
+             }
+       }
+    }
 }
