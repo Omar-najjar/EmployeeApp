@@ -3,9 +3,7 @@ pipeline {
   stages {
     stage('Launch FrontEnd Pipeline') {
       when {
-        expression {
-                    return true // The condition is always true
-                }
+        changeset "**/EmployeeProjectFront/**"
       }
       steps {
         build job: 'FrontEmployeePipeline'
