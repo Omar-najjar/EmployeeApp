@@ -3,7 +3,9 @@ pipeline {
   stages {
     stage('Launch FrontEnd Pipeline') {
       when {
-        true
+        expression {
+                    return true // The condition is always true
+                }
       }
       steps {
         build job: 'FrontEmployeePipeline'
