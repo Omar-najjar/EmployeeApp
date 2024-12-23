@@ -1,10 +1,31 @@
 pipeline {
-    agent any 
+    agent any
+    environment{
+        		IMAGE_NAME = "omarnajar/employee_backend"
+    }
+
     stages {
-        stage('Stage 1') {
-            steps {
-                echo 'Hello world Back' 
-            }
+
+        stage ('build docker image from dockerfile'){
+                steps{
+                    script {
+                    // Get the short Git commit hash
+                    GIT_COMMIT = bat(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                }
+                    bat 'docker build -t %IMAGE_NAME%:%GIT_COMMIT% -t %IMAGE_NAME%:latest EmployeeProjectBack/.'
+                }
+        }
+
+        stage ('login to omar dockerhub'){
+             steps{
+                  bat 'docker login -u %USER% -p %PASSWORD%'
+             }
+        }
+
+        stage ('push image to omar dockerhub'){
+             steps{
+                  bat 'docker push %IMAGE_NAME%:%GIT_COMMIT%'
+             }
         }
     }
 }
