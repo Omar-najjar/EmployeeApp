@@ -11,7 +11,7 @@ pipeline {
     }
     stage('Launch BackEnd Pipeline') {
       when {
-        changeset "EmployeeProjectBack/"
+        changeset "**/EmployeeProjectBack/**"
       }
       steps {
         build job: 'BackEmployeePipeline'
