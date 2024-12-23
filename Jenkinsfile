@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Launch FrontEnd Pipeline') {
       when {
-        changeset "EmployeeProjectFront/"
+        true
       }
       steps {
         build job: 'FrontEmployeePipeline'
