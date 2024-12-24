@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: my-dep
+  name: my-dep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: emp-front
+      tier: front
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: emp-front
+        tier: front
+    spec:
+      containers:
+      - image: omarnajar/employee_frontend:c435a7c2d1bfe59b78cfaebbe42cf63762a3143a
+        name: employee-frontend-s9cm9
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}

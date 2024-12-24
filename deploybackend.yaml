@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dep-backend
+  name: dep-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dep-backend
+      tier: back
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dep-backend
+        tier: back
+    spec:
+      containers:
+      - image: omarnajar/employee_backend:5bde38f541064e6a22222be1fddf8b0ca11f9091
+        name: employee-backend-knr88
+        env:
+        - name:  SPRING_DATASOURCE_URL
+          value: postgres-service:5432
+        - name:  SPRING_DATASOURCE_USERNAME
+          value: "postgres"
+        - name:  SPRING_DATASOURCE_PASSWORD
+          value: "password"
+        - name:  SPRING_JPA_HIBERNATE_DDL_AUTO
+          value: "update"
+
+        resources: {}
+status: {}
