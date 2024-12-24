@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     
-                    bat "kubectl --kubeconfig=%KUBECONFIG_PATH% set image deployment/my-dep employee-frontend-s9cm9=%DEPLOY_IMAGE%"
+                    bat "kubectl --kubeconfig=%KUBECONFIG_PATH% set image deployment/my-dep employee-frontend-s9cm9=%IMAGE_NAME%:%GIT_COMMIT%"
                 }
             }
         }
