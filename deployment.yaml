@@ -17,10 +17,10 @@ spec:
       creationTimestamp: null
       labels:
         app: emp-front
-        tier: front
+        tier: front 
     spec:
       containers:
-      - image: omarnajar/employee_frontend:c435a7c2d1bfe59b78cfaebbe42cf63762a3143a
+      - image: omarnajar/employee_frontend:1f44ae0b140fa66b69a897a2e1eeb54b7a0a6a99
         name: employee-frontend-s9cm9
         ports:
         - containerPort: 80

@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment{
         		IMAGE_NAME = "omarnajar/employee_frontend"
+                KUBECONFIG_PATH = "E:\\minikube\\minikube"
     }
     stages {
         stage ('build docker image from dockerfile'){
@@ -23,6 +24,19 @@ pipeline {
         stage ('push image to omar dockerhub'){
             steps{
                 bat 'docker push %IMAGE_NAME%:%GIT_COMMIT%'
+            }
+        }
+
+        stage('Deploy to kube') {
+            environment {
+                
+                DEPLOY_IMAGE = "%IMAGE_NAME%:%GIT_COMMIT%"
+            }
+            steps {
+                script {
+                    
+                    bat "kubectl --kubeconfig=%KUBECONFIG_PATH% set image deployment/my-dep employee-frontend-s9cm9=%DEPLOY_IMAGE%"
+                }
             }
         }
 

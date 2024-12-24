@@ -31,5 +31,12 @@ spec:
           value: "postgres"
         - name: POSTGRES_DB
           value: "postgres"
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-storage
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc
         resources: {}
 status: {}
