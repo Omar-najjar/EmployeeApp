@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment{
         		IMAGE_NAME = "omarnajar/employee_frontend"
-                KUBECONFIG_PATH = "E:\\minikube"
+                KUBECONFIG_PATH = "C:\\Users\\najar\\.kube\\config"
     }
     stages {
         stage ('build docker image from dockerfile'){
