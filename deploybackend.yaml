@@ -24,13 +24,17 @@ spec:
         name: employee-backend-knr88
         env:
         - name:  SPRING_DATASOURCE_URL
-          value: jdbc:postgresql://postgres-service:5432/
+          value: jdbc:postgresql://postgres-service:5432/postgres
         - name:  SPRING_DATASOURCE_USERNAME
           value: "postgres"
         - name:  SPRING_DATASOURCE_PASSWORD
           value: "password"
         - name:  SPRING_JPA_HIBERNATE_DDL_AUTO
           value: "update"
+      initContainers:
+      - name: wait-for-postgres
+        image: busybox:1.28
+        command: ['sh', '-c', 'until nc -z postgres-service 5432; do echo waiting for database; sleep 5; done;']
 
         resources: {}
 status: {}
