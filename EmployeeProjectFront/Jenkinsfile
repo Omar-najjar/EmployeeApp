@@ -26,10 +26,5 @@ pipeline {
             }
         }
 
-        stage ('run docker container'){
-             steps{
-                  bat 'docker run -d -p 82:80 %IMAGE_NAME%:latest'
-             }
-}
 }
 }
